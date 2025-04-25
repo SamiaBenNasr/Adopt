@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Détails de l'Animal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+  <h2 th:text="'Détails de ' + ${animal.name}"></h2>
+  <div class="card" style="width: 24rem;">
+    <img th:src="${animal.image}" class="card-img-top" alt="Animal" th:if="${animal.image != null}">
+    <div class="card-body">
+      <h5 class="card-title" th:text="${animal.name}"></h5>
+      <p class="card-text"><strong>Espèce :</strong> <span th:text="${animal.species}"></span></p>
+      <p class="card-text"><strong>Âge :</strong> <span th:text="${animal.age} + ' ans'"></span></p>
+      <p class="card-text"><strong>Adopté :</strong> <span th:text="${animal.adopted} ? 'Oui' : 'Non'"></span></p>
+      <a th:href="@{/animaux}" class="btn btn-secondary">Retour</a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
