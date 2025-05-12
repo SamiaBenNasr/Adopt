@@ -2,28 +2,38 @@
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Adopter un animal</title>
+    <title th:text="#{adoption.form.title}">Adopter un animal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<div th:replace="fragments/header :: siteHeader"></div>
+
 <div class="container mt-5">
-    <h2>Formulaire d'adoption pour <span th:text="${animal.name}"></span></h2>
+    <h2>
+        <span th:text="#{adoption.form.for} + ' ' + ${animal.name}">Formulaire d'adoption pour [Nom]</span>
+    </h2>
     <form action="#" th:action="@{/adopter/{id}(id=${animal.id})}" method="post">
         <div class="mb-3">
-            <label class="form-label">Votre nom :</label>
+            <label class="form-label" th:text="#{adoption.form.name}">Votre nom :</label>
             <input type="text" class="form-control" name="name" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Email :</label>
+            <label class="form-label" th:text="#{adoption.form.email}">Email :</label>
             <input type="email" class="form-control" name="email" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Pourquoi voulez-vous adopter cet animal ?</label>
+            <label class="form-label" th:text="#{adoption.form.motivation}">Pourquoi voulez-vous adopter cet animal ?</label>
             <textarea class="form-control" name="motivation" rows="4" required></textarea>
         </div>
-        <button type="submit" class="btn btn-success">Soumettre la demande</button>
-        <a th:href="@{/animaux}" class="btn btn-secondary">Retour</a>
+        <button type="submit" class="btn btn-success" th:text="#{adoption.form.submit}">Soumettre la demande</button>
+        <a th:href="@{/animaux}" class="btn btn-secondary" th:text="#{back.button}">Retour</a>
     </form>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<div th:replace="fragments/footer :: siteFooter"></div>
 </body>
 </html>

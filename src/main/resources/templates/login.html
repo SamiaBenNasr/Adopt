@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{page.login}">Connexion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="fragments/header :: siteHeader"></div>
+<div class="container mt-5" style="max-width: 400px;">
+    <h2 th:text="#{page.login}">Connexion</h2>
+    <form method="post" th:action="@{/login}">
+        <div class="mb-3">
+            <label for="username" th:text="#{label.username}">Nom d'utilisateur</label>
+            <input type="text" class="form-control" id="username" name="username" required/>
+        </div>
+        <div class="mb-3">
+            <label for="password" th:text="#{label.password}">Mot de passe</label>
+            <input type="password" class="form-control" id="password" name="password" required/>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" th:text="#{button.login}">Se connecter</button>
+    </form>
+    <p class="text-center mt-3">
+        <span th:text="#{text.noAccount}">Pas encore de compte ?</span>
+        <a th:href="@{/register}" class="btn btn-link p-0" th:text="#{button.register}">Inscrivez-vous</a>
+    </p>
+</div>
+<div th:replace="fragments/footer :: siteFooter"></div>
+</body>
+</html>

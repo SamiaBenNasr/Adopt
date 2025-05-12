@@ -3,46 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ajouter/Modifier un Animal</title>
+  <title th:text="#{animal.form.title}">Ajouter/Modifier un Animal</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<div th:replace="fragments/header :: siteHeader"></div>
 
 <div class="container mt-5">
-  <h2 th:text="${animal.id} != null ? 'Modifier Animal' : 'Ajouter Animal'"></h2>
+  <h2 th:text="${animal.id} != null ? #{animal.form.edit.title} : #{animal.form.add.title}">Ajouter/Modifier</h2>
 
   <form th:action="@{/animal/save}" th:object="${animal}" method="post">
     <input type="hidden" th:field="*{id}"/>
 
     <div class="mb-3">
-      <label class="form-label">Nom</label>
+      <label class="form-label" th:text="#{animal.form.name}">Nom</label>
       <input type="text" class="form-control" th:field="*{name}" required>
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Espèce</label>
+      <label class="form-label" th:text="#{animal.form.species}">Espèce</label>
       <input type="text" class="form-control" th:field="*{species}" required>
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Âge</label>
-      <input type="number" class="form-control" th:field="*{age}" min="0" required>
+      <label class="form-label" th:text="#{animal.form.age}">Âge</label>
+      <input type="text" class="form-control" th:field="*{age}">
     </div>
 
     <div class="mb-3">
-      <label class="form-label">URL de l'image</label>
-      <input type="text" class="form-control" th:field="*{image}">
+      <label class="form-label" th:text="#{animal.form.image}">URL de l'image</label>
+      <input type="text" class="form-control" th:field="*{image}" placeholder="https://...">
     </div>
 
     <div class="mb-3 form-check">
       <input class="form-check-input" type="checkbox" th:field="*{adopted}">
-      <label class="form-check-label">Adopté</label>
+      <label class="form-check-label" th:text="#{animal.form.adopted}">Adopté</label>
     </div>
 
-    <button type="submit" class="btn btn-primary">Enregistrer</button>
-    <a th:href="@{/animaux}" class="btn btn-secondary">Annuler</a>
+    <button type="submit" class="btn btn-primary" th:text="#{save.button}">Enregistrer</button>
+    <a th:href="@{/animaux}" class="btn btn-secondary" th:text="#{cancel.button}">Annuler</a>
   </form>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<div th:replace="fragments/footer :: siteFooter"></div>
 </body>
 </html>

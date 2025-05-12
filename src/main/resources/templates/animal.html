@@ -1,26 +1,45 @@
 <!DOCTYPE html>
-<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Détails de l'Animal</title>
+  <title th:text="#{animal.details.title}">Détails de l'Animal</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<div th:replace="fragments/header :: siteHeader"></div>
 
 <div class="container mt-5">
-  <h2 th:text="'Détails de ' + ${animal.name}"></h2>
+  <h2 th:text="#{animal.details.of} + ' ' + ${animal.name}">Détails de X</h2>
   <div class="card" style="width: 24rem;">
     <img th:src="${animal.image}" class="card-img-top" alt="Animal" th:if="${animal.image != null}">
     <div class="card-body">
-      <h5 class="card-title" th:text="${animal.name}"></h5>
-      <p class="card-text"><strong>Espèce :</strong> <span th:text="${animal.species}"></span></p>
-      <p class="card-text"><strong>Âge :</strong> <span th:text="${animal.age} + ' ans'"></span></p>
-      <p class="card-text"><strong>Adopté :</strong> <span th:text="${animal.adopted} ? 'Oui' : 'Non'"></span></p>
-      <a th:href="@{/animaux}" class="btn btn-secondary">Retour</a>
+      <h5 class="card-title" th:text="${animal.name}">Nom</h5>
+      <p class="card-text"><strong th:text="#{animal.species} + ' :'">Espèce :</strong> <span th:text="${animal.species}"></span></p>
+      <p class="card-text">
+        <strong th:text="#{animal.age} + ' :'">Âge :</strong>
+        <span th:text="${animal.age} + ' ' + #{animal.years}">2 ans</span>
+      </p>
+      <p class="card-text">
+        <strong th:text="#{animal.adopted} + ' :'">Adopté :</strong>
+        <span th:text="${animal.adopted} ? #{yes} : #{no}"></span>
+      </p>
+      <a th:href="@{/animaux}" class="btn btn-secondary" th:text="#{back.button}">Retour</a>
+      <a th:if="${!animal.adopted}"
+         th:href="@{/adopter/{id}(id=${animal.id})}"
+         class="btn btn-success"
+         th:text="#{animal.adopt.button}">
+        Adopter cet animal
+      </a>
     </div>
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<div th:replace="fragments/footer :: siteFooter"></div>
 </body>
 </html>
