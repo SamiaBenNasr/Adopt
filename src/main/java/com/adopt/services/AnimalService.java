@@ -30,8 +30,12 @@ public class AnimalService {
         animalRepository.deleteById(id);
     }
 
-    public List<Animal> findBySpecies(String species) {
-        return animalRepository.findBySpeciesIgnoreCase(species);  // Recherche insensible à la casse
+
+    public  List<Animal> searchAnimals(String species) {
+        if (species== null || species.isEmpty()) {
+            return animalRepository.findAll();
+        }
+        return animalRepository.findBySpeciesContainingIgnoreCase(species);  // Recherche insensible à la casse
     }
 
     public void saveAnimal(Animal animal) {

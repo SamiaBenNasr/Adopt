@@ -16,7 +16,8 @@
     <img th:src="${animal.image}" class="card-img-top" alt="Animal" th:if="${animal.image != null}">
     <div class="card-body">
       <h5 class="card-title" th:text="${animal.name}">Nom</h5>
-      <p class="card-text"><strong th:text="#{animal.species} + ' :'">Espèce :</strong> <span th:text="${animal.species}"></span></p>
+      <p class="card-text"><strong th:text="#{animal.species} + ' :'">Espèce :</strong> <span th:text="#{${'species.' + animal.species}}"></span>
+      </p>
       <p class="card-text">
         <strong th:text="#{animal.age} + ' :'">Âge :</strong>
         <span th:text="${animal.age} + ' ' + #{animal.years}">2 ans</span>

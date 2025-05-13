@@ -13,10 +13,35 @@
 
 <div class="container my-5 col-md-10">
     <h2 class="mb-4" th:text="#{title.animals.list}">Liste des animaux disponibles à l'adoption</h2>
+    <form th:action="@{/animaux}" method="get" class="mb-4">
+        <div class="input-group">
+            <select name="searchSpecies" class="form-select">
+                <option value="" th:text="#{placeholder.searchSpecies}">Rechercher par espèce</option>
+                <option value="Chat" th:text="#{species.Chat}"
+                        th:selected="${searchSpecies == 'Chat'}">Chat</option>
+                <option value="Chien" th:text="#{species.Chien}"
+                        th:selected="${searchSpecies == 'Chien'}">Chien</option>
+                <option value="Lapin" th:text="#{species.Lapin}"
+                        th:selected="${searchSpecies == 'Lapin'}">Lapin</option>
+                <option value="Perroquet" th:text="#{species.Perroquet}"
+                        th:selected="${searchSpecies == 'Perroquet'}">Perroquet</option>
+                <option value="Hamster" th:text="#{species.Hamster}"
+                        th:selected="${searchSpecies == 'Hamster'}">Hamster</option>
+                <option value="Canard" th:text="#{species.Canard}"
+                        th:selected="${searchSpecies == 'Canard'}">Canard</option>
+                <option value="Poule" th:text="#{species.Poule}"
+                        th:selected="${searchSpecies == 'Poule'}">Poule</option>
+                <option value="Tortue" th:text="#{species.Tortue}"
+                        th:selected="${searchSpecies == 'Tortue'}">Tortue</option>
+            </select>
+            <button type="submit" class="btn btn-primary" th:text="#{button.search}">Rechercher</button>
+        </div>
+    </form>
+
+
     <table class="table table-striped table-hover">
         <thead>
         <tr>
-            <th scope="col" th:text="#{label.id}">Id</th>
             <th scope="col" th:text="#{label.name}">Nom</th>
             <th scope="col" th:text="#{label.species}">Espèce</th>
             <th scope="col" th:text="#{label.age}">Âge</th>
@@ -27,9 +52,8 @@
         </thead>
         <tbody>
         <tr th:each="a : ${animaux}">
-            <td th:text="${a.id}"></td>
             <td th:text="${a.name}"></td>
-            <td th:text="${a.species}"></td>
+            <td th:text="#{${'species.' + a.species}}"></td>
             <td th:text="${a.age} + ' ' + #{unit.years}"></td>
             <td>
                 <img th:src="${a.image}" alt="animal" style="width: 100px; height: auto;">

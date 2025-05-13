@@ -17,9 +17,16 @@ public class AnimalController {
     private AnimalService animalService;
 
     @GetMapping({"/", "/animaux"})
-    public String afficherAnimaux(Model model) {
+    /*public String afficherAnimaux(Model model) {
         model.addAttribute("animaux", animalService.getAllAnimals());
         return "animaux";
+    }*/
+
+    public String listAnimals(@RequestParam(name = "searchSpecies", required = false) String searchSpecies, Model model) {
+        List<Animal> animaux=animalService.searchAnimals(searchSpecies) ;
+        model.addAttribute("animaux", animaux);
+        model.addAttribute("searchSpecies", searchSpecies);  // Envoie le terme de recherche à la vue
+        return "animaux";  // Assurez-vous d'avoir une vue animaux.html
     }
 
     @GetMapping("/animal/{id}")
